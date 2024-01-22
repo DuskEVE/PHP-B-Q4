@@ -1,6 +1,5 @@
-<h2>第一次購買</h2>
-<img src="./icon/0413.jpg" onclick="location.href='?do=reg'">
-<h2>會員登入</h2>
+
+<h2>管理員登入</h2>
 <table class="all">
     <tr>
         <td class="tt">帳號</td>
@@ -24,7 +23,7 @@
     </tr>
 </table>
 <div class="ct">
-    <button onclick="login('member')">確認</button>
+    <button onclick="login('admin')">確認</button>
 </div>
 
 <script>

@@ -105,3 +105,4 @@ class myDB{
 }
 
 $Bottom = new myDB('localhost', 'utf8', 'db15_4', 'root', '', 'bottom');
+$Member = new myDB('localhost', 'utf8', 'db15_4', 'root', '', 'member');
