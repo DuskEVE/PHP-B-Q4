@@ -103,3 +103,5 @@ class myDB{
         return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+
+$Bottom = new myDB('localhost', 'utf8', 'db15_4', 'root', '', 'bottom');
