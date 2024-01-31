@@ -37,9 +37,5 @@
     const delBtn = $('.del-btn');
 
     editBtn.on('click', (event) => location.href=`./admin.php?do=edit_admin&id=${$(event.target).data('id')}`);
-    delBtn.on('click', (event) => {
-        let id = $(event.target).data('id');
-        let table = 'admin';
-        $.post('./api/del.php', {id, table}, () => location.reload());
-    });
+    delBtn.on('click', (event) => del($(event.target).data('id'), 'admin'));
 </script>
