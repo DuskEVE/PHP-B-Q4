@@ -107,3 +107,4 @@ class myDB{
 $Bottom = new myDB('localhost', 'utf8', 'db15_4', 'root', '', 'bottom');
 $Member = new myDB('localhost', 'utf8', 'db15_4', 'root', '', 'member');
 $Admin = new myDB('localhost', 'utf8', 'db15_4', 'root', '', 'admin');
+$Type = new myDB('localhost', 'utf8', 'db15_4', 'root', '', 'type');
