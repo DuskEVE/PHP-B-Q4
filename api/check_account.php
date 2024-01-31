@@ -1,8 +1,8 @@
 <?php
 include_once "./db.php";
-$tsble = $_POST['table'];
+$table = $_POST['table'];
 unset($_POST['table']);
-$DB = new myDB('localhost', 'utf8', 'db15_4', 'root', '', $tsble);
+$DB = new myDB('localhost', 'utf8', 'db15_4', 'root', '', $table);
 
 $check = $DB->count($_POST);
 if($check){

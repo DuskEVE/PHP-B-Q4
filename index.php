@@ -25,8 +25,14 @@ include_once "./api/db.php";
 				<a href="?do=news">最新消息</a> |
 				<a href="?do=look">購物流程</a> |
 				<a href="?do=buycart">購物車</a> |
-				<a href="?do=login">會員登入</a> |
-				<a href="?do=admin">管理登入</a>
+				<?php
+				if(isset($_SESSION['member'])) echo "<a href='./api/logout.php'>登出</a>";
+				else echo "<a href='?do=login'>會員登入</a>";
+				?> |
+				<?php
+				if(isset($_SESSION['admin'])) echo "<a href='./admin.php'>返回管理</a>";
+				else echo "<a href='?do=admin'>管理登入</a>";
+				?>
 			</div>
 			<marquee behavior="" direction="">
 				年終特賣會開跑了 &nbsp; 情人節特惠活動 &nbsp;
