@@ -15,20 +15,7 @@
 </div>
 
 <table class="all type-list">
-    <!-- <tr class="main-type tt">
-        <td></td>
-        <td class="ct">
-            <button>修改</button>
-            <button>刪除</button>
-        </td>
-    </tr>
-    <tr class="sub-type-1 pp ct">
-        <td></td>
-        <td class="ct">
-            <button>修改</button>
-            <button>刪除</button>
-        </td>
-    </tr> -->
+
 </table>
 
 <h2 class="ct">商品管理</h2>
@@ -89,8 +76,8 @@
         let main_id = (type === 'main'? 0:$('#main_id').val());
         let name = (type === 'main'? $('#main-type').val():$('#sub-type').val());
 
-        $.post('./api/save_type.php', {main_id, name}, () => {
-            if(main_id === 0) $('type-list').append(newRow(name, 0));
+        $.post('./api/save_type.php', {main_id, name}, (response) => {
+            if(main_id === 0) $('type-list').append(newRow(name, 0, ));
             else if($(`.sub-type-${main_id}`).length === 0){
                 $(`.main-type-${main_id}`).after(newRow(name, main_id));
             }
