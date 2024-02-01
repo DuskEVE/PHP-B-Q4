@@ -53,7 +53,7 @@
         let row;
         let option = `<td class="ct">
                         <button>修改</button>
-                        <button>刪除</button>
+                        <button class='type-del-btn' data-id='${id}'>刪除</button>
                       </td>`;
         if(main_id===0){
             row = `
@@ -77,17 +77,22 @@
         let name = (type === 'main'? $('#main-type').val():$('#sub-type').val());
 
         $.post('./api/save_type.php', {main_id, name}, (response) => {
-            if(main_id === 0) $('type-list').append(newRow(name, 0, ));
-            else if($(`.sub-type-${main_id}`).length === 0){
-                $(`.main-type-${main_id}`).after(newRow(name, main_id));
+            // 這裡save_type.php 回傳的 response 會是新增資料的id
+            if(main_id === 0){
+                $('.type-list').append(newRow(name, 0, response));
+                getMainType();
             }
-            else $(`.sub-type-${main_id}`).last().after(newRow(name, main_id));
+            else if($(`.sub-type-${main_id}`).length === 0){
+                $(`.main-type-${main_id}`).after(newRow(name, main_id, response));
+            }
+            else $(`.sub-type-${main_id}`).last().after(newRow(name, main_id, response));
         });
     };
     const getMainType = () => {
         let main_id = 0;
         $.get('./api/get_type.php', {main_id}, (response) => {
             response = JSON.parse(response);
+            $('#main_id').empty();
             for(let i=0; i<response.length; i++){
                 let option = `<option value='${response[i].id}'>${response[i].name}</option>`;
                 $('#main_id').append(option);
@@ -109,8 +114,18 @@
                 }
                 else $(`.sub-type-${element.main_id}`).last().after(newRow(element.name, element.main_id))
             });
+
+            $('.type-del-btn').on('click', delType);
         })
     }
+    const delType = (event) => {
+        let id = $(event.target).data('id');
+        let table = 'type';
+        $.post('./api/del.php', {id, table}, () => {
+            $(event.target).parent().parent().remove();
+            getMainType();
+        });
+    };
 
     addTypeBtn.on('click', addType);
 

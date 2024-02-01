@@ -1,5 +1,5 @@
 <?php
 include_once "./db.php";
 $Type->update($_POST);
-if($_POST['main_id'] == 0) echo ""
+echo $Type->searchAll([], "order by `id` desc limit 1")[0]['id'];
 ?>
