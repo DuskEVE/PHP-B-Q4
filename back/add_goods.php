@@ -5,13 +5,17 @@
         <tr>
             <th class="tt ct">所屬大分類</th>
             <td class="pp">
-                <select name="" id=""></select>
+                <select name="" id="main-type">
+                    
+                </select>
             </td>
         </tr>
         <tr>
             <th class="tt ct">所屬中分類</th>
             <td class="pp">
-                <select name="" id=""></select>
+                <select name="" id="sub-type">
+
+                </select>
             </td>
         </tr>
         <tr>
@@ -51,8 +55,36 @@
         <tr>
             <th class="tt ct">商品介紹</th>
             <td class="pp">
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <textarea name="" id="" style="width: 80%; height: 150px;"></textarea>
             </td>
         </tr>
     </table>
 </form>
+
+<script>
+    const mainType = $('#main-type');
+    const subType = $('sub-type');
+
+    const getType = (mainId) => {
+        $.get('./api/get_type.php', {main_id: mainId}, (response) => {
+            let types = JSON.parse(response);
+            let target = null;
+
+            if(mainId === 0) target = $('#main-type');
+            else target = $('#sub-type');
+            types.foreach(type => {
+                let element = `
+                <option value="${type['id']}">${type['name']}</option>
+                `;
+                target.append(element);
+            });
+        });
+
+        mainType.on('change', () => {
+
+        })
+
+        getType(0);
+    };
+
+</script>

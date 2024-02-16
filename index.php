@@ -43,6 +43,27 @@ include_once "./api/db.php";
 		</div>
 		<div id="left" class="ct">
 			<div style="min-height:400px;">
+			<a>全部商品</a>
+			<?php
+			$mains = $Type->searchAll(['main_id'=>0]);
+			foreach($mains as $main){
+			?>
+			<div class="ww">
+				<a href=""><?=$main['name']?></a>
+				<div class="s">
+					<?php
+					if($Type->count(['main_id'=>$main['id']]) > 0){
+						$subs = $Type->searchAll(['main_id'=>$main['id']]);
+						foreach($subs as $sub){
+							echo "<a>{$sub['name']}</a>";
+						}
+					}
+					?>
+				</div>
+			</div>
+			<?php
+			}
+			?>
 			</div>
 			<span>
 				<div>進站總人數</div>

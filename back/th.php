@@ -20,7 +20,7 @@
 
 <h2 class="ct">商品管理</h2>
 <div class="ct">
-    <button>新增商品</button>
+    <button class="add-good-btn">新增商品</button>
 </div>
 
 <table class="all">
@@ -31,23 +31,30 @@
         <td>狀態</td>
         <td>操作</td>
     </tr>
+    <?php
+    $goods = $Goods->searchAll();
+    foreach($goods as $good){
+    ?>
     <tr class="pp">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><?=$good['no']?></td>
+        <td><?=$good['name']?></td>
+        <td><?=$good['stock']?></td>
+        <td><?=$good['display']==1?"上架":"下架"?></td>
         <td class="ct">
-            <button>修改</button>
-            <button>刪除</button><br>
-            <button>上架</button>
-            <button>下架</button>
+            <button class="edit-goods-btn" data-id="<?=$good['id']?>">修改</button>
+            <button class="del-goods-btn" data-id="<?=$good['id']?>">刪除</button><br>
+            <button class="show-goods-btn" data-id="<?=$good['id']?>">上架</button>
+            <button class="hide-goods-btn" data-id="<?=$good['id']?>">下架</button>
         </td>
     </tr>
+    <?php
+    }
+    ?>
 </table>
 
 <script>
-
     const addTypeBtn = $('.add-type-btn');
+    const addGoodBtn = $('.add-good-btn');
 
     const newRow = (name, main_id, id) => {
         let row;
@@ -76,8 +83,8 @@
         let main_id = (type === 'main'? 0:$('#main_id').val());
         let name = (type === 'main'? $('#main-type').val():$('#sub-type').val());
 
+        // 這裡save_type.php 回傳的 response 會是新增資料的id
         $.post('./api/save_type.php', {main_id, name}, (response) => {
-            // 這裡save_type.php 回傳的 response 會是新增資料的id
             if(main_id === 0){
                 $('.type-list').append(newRow(name, 0, response));
                 getMainType();
@@ -128,6 +135,7 @@
     };
 
     addTypeBtn.on('click', addType);
+    addGoodBtn.on('click', () => location.href = '?do=add_goods')
 
     getMainType();
     getTypeList();
