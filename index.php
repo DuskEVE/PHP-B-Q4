@@ -43,19 +43,20 @@ include_once "./api/db.php";
 		</div>
 		<div id="left" class="ct">
 			<div style="min-height:400px;">
-			<a>全部商品</a>
+			<a href="?type=0">全部商品(<?=$Goods->count(['display'=>1])?>)</a>
 			<?php
 			$mains = $Type->searchAll(['main_id'=>0]);
 			foreach($mains as $main){
 			?>
 			<div class="ww">
-				<a href=""><?=$main['name']?></a>
+				<a href="?type=<?=$main['id']?>"><?=$main['name']?>(<?=$Goods->count(['display'=>1, 'main'=>$main['id']])?>)</a>
 				<div class="s">
 					<?php
 					if($Type->count(['main_id'=>$main['id']]) > 0){
 						$subs = $Type->searchAll(['main_id'=>$main['id']]);
 						foreach($subs as $sub){
-							echo "<a>{$sub['name']}</a>";
+							$total = $Goods->count(['display'=>1, 'sub'=>$sub['id']]);
+							echo "<a href='?type={$sub['id']}'>{$sub['name']}($total)</a>";
 						}
 					}
 					?>

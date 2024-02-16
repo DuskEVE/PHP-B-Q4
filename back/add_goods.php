@@ -69,7 +69,7 @@
         $.get('./api/get_type.php', {main_id: mainId}, (response) => {
             let types = JSON.parse(response);
             let target = null;
-
+            console.log(types);
             if(mainId === 0) target = $('#main-type');
             else target = $('#sub-type');
             types.foreach(type => {
