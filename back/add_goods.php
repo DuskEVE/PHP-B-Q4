@@ -1,11 +1,11 @@
 
 <h2 class="ct">新增商品</h2>
-<form action="" method="post" enctype="multipart/form-data">
+<form action="./api/save_goods.php" method="post" enctype="multipart/form-data">
     <table class="all">
         <tr>
             <th class="tt ct">所屬大分類</th>
             <td class="pp">
-                <select name="" id="main-type">
+                <select name="main" id="main-type">
                     
                 </select>
             </td>
@@ -13,7 +13,7 @@
         <tr>
             <th class="tt ct">所屬中分類</th>
             <td class="pp">
-                <select name="" id="sub-type">
+                <select name="sub" id="sub-type">
 
                 </select>
             </td>
@@ -25,40 +25,45 @@
         <tr>
             <th class="tt ct">商品名稱</th>
             <td class="pp">
-                <input type="text" name="" id="">
+                <input type="text" name="name" id="">
             </td>
         </tr>
         <tr>
             <th class="tt ct">商品價格</th>
             <td class="pp">
-                <input type="text" name="" id="">
+                <input type="text" name="price" id="">
             </td>
         </tr>
         <tr>
             <th class="tt ct">規格</th>
             <td class="pp">
-                <input type="text" name="" id="">
+                <input type="text" name="spec" id="">
             </td>
         </tr>
         <tr>
             <th class="tt ct">庫存量</th>
             <td class="pp">
-                <input type="text" name="" id="">
+                <input type="text" name="stock" id="">
             </td>
         </tr>
         <tr>
             <th class="tt ct">商品圖片</th>
             <td class="pp">
-                <input type="file" name="" id="">
+                <input type="file" name="file" id="">
             </td>
         </tr>
         <tr>
             <th class="tt ct">商品介紹</th>
             <td class="pp">
-                <textarea name="" id="" style="width: 80%; height: 150px;"></textarea>
+                <textarea name="intro" id="" style="width: 80%; height: 150px;"></textarea>
             </td>
         </tr>
     </table>
+    <div class="ct">
+        <input type="submit" value="新增">|
+        <input type="reset" value="重置">|
+        <button onclick="location.href='?do=th'">返回</button>
+    </div>
 </form>
 
 <script>
@@ -67,24 +72,25 @@
 
     const getType = (mainId) => {
         $.get('./api/get_type.php', {main_id: mainId}, (response) => {
-            let types = JSON.parse(response);
+            let types = Array.from(JSON.parse(response));
             let target = null;
-            console.log(types);
+
             if(mainId === 0) target = $('#main-type');
             else target = $('#sub-type');
-            types.foreach(type => {
+            types.forEach(type => {
                 let element = `
                 <option value="${type['id']}">${type['name']}</option>
                 `;
                 target.append(element);
             });
+            if(mainId === 0) getType(Number(mainType.val()));
         });
-
-        mainType.on('change', () => {
-
-        })
-
-        getType(0);
     };
 
+    mainType.on('change', () => {
+        let mainId = Number(mainType.val());
+        getType(mainId);
+    })
+
+    getType(0);
 </script>
