@@ -68,15 +68,18 @@
 
 <script>
     const mainType = $('#main-type');
-    const subType = $('sub-type');
+    const subType = $('#sub-type');
 
     const getType = (mainId) => {
         $.get('./api/get_type.php', {main_id: mainId}, (response) => {
             let types = Array.from(JSON.parse(response));
             let target = null;
 
-            if(mainId === 0) target = $('#main-type');
-            else target = $('#sub-type');
+            if(mainId === 0) target = mainType;
+            else{
+                target = subType;
+                target.empty();
+            }
             types.forEach(type => {
                 let element = `
                 <option value="${type['id']}">${type['name']}</option>
