@@ -20,7 +20,7 @@
 
 <h2 class="ct">商品管理</h2>
 <div class="ct">
-    <button class="add-good-btn">新增商品</button>
+    <button class="add-goods-btn">新增商品</button>
 </div>
 
 <table class="all">
@@ -39,7 +39,7 @@
         <td><?=$good['no']?></td>
         <td><?=$good['name']?></td>
         <td><?=$good['stock']?></td>
-        <td><?=$good['display']==1?"上架":"下架"?></td>
+        <td id="display-<?=$good['id']?>"><?=$good['display']==1?"上架":"下架"?></td>
         <td class="ct">
             <button class="edit-goods-btn" data-id="<?=$good['id']?>">修改</button>
             <button class="del-goods-btn" data-id="<?=$good['id']?>">刪除</button><br>
@@ -54,7 +54,9 @@
 
 <script>
     const addTypeBtn = $('.add-type-btn');
-    const addGoodBtn = $('.add-good-btn');
+    const addGoodsBtn = $('.add-goods-btn');
+    const showGoodsBtn = $('.show-goods-btn');
+    const hideGoodsBtn = $('.hide-goods-btn');
 
     const newRow = (name, main_id, id) => {
         let row;
@@ -133,9 +135,19 @@
             getMainType();
         });
     };
+    const showGoods = (event) => {
+        let id = $(event.target).data('id');
+        $.post('./api/display_goods.php', {id, display: 1}, () => $(`#display-${id}`).text('上架'))
+    };
+    const hideGoods = (event) => {
+        let id = $(event.target).data('id');
+        $.post('./api/display_goods.php', {id, display: 0}, () => $(`#display-${id}`).text('下架'))
+    };
 
     addTypeBtn.on('click', addType);
-    addGoodBtn.on('click', () => location.href = '?do=add_goods')
+    addGoodsBtn.on('click', () => location.href = '?do=add_goods')
+    showGoodsBtn.on('click', showGoods);
+    hideGoodsBtn.on('click', hideGoods);
 
     getMainType();
     getTypeList();
