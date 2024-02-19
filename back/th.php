@@ -57,6 +57,8 @@
     const addGoodsBtn = $('.add-goods-btn');
     const showGoodsBtn = $('.show-goods-btn');
     const hideGoodsBtn = $('.hide-goods-btn');
+    const editGoodsBtn = $('.edit-goods-btn');
+    const delGoodsBtn = $('.del-goods-btn');
 
     const newRow = (name, main_id, id) => {
         let row;
@@ -143,11 +145,17 @@
         let id = $(event.target).data('id');
         $.post('./api/display_goods.php', {id, display: 0}, () => $(`#display-${id}`).text('下架'))
     };
+    const delGoods = (event) => {
+        let id = $(event.target).data('id');
+        $.post('./api/del_goods.php', {id}, () => $(event.target).parent().parent().empty());
+    };
 
     addTypeBtn.on('click', addType);
     addGoodsBtn.on('click', () => location.href = '?do=add_goods')
     showGoodsBtn.on('click', showGoods);
     hideGoodsBtn.on('click', hideGoods);
+    editGoodsBtn.on('click', (event) => location.href = `?do=edit_goods&id=${$(event.target).data('id')}`);
+    delGoodsBtn.on('click', delGoods);
 
     getMainType();
     getTypeList();
