@@ -87,5 +87,6 @@ $Admin = new myDB('admin');
 $Bottom = new myDB('bottom');
 $Goods = new myDB('goods');
 $Orders = new myDB('orders');
+$Type = new myDB('type');
 
 ?>
