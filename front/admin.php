@@ -1,8 +1,4 @@
 <div class="all">
-    <h3>第一次購物</h3>
-    <a href="?do=reg">
-        <img src="./icon/0413.jpg" alt="">
-    </a>
 
     <h3>會員登入</h3>
     <table style="width: 70%; margin:auto;">
@@ -39,8 +35,8 @@
         let user = $('.login-user').val();
         let password = $('.login-password').val();
         let check = $('.check').val();
-        $.post('./api/login.php', {user, password, check}, (response) => {
-            if(response === '1') location.href = './index.php';
+        $.post('./api/admin.php', {user, password, check}, (response) => {
+            if(response === '1') location.href = './admin.php';
             else alert(response);
         });
     })

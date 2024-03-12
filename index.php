@@ -12,6 +12,7 @@ include_once "./api/db.php";
 	<title>┌精品電子商務網站」</title>
 	<link href="./css/css.css" rel="stylesheet" type="text/css">
 	<script src="./js/js.js"></script>
+	<script src="./js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
@@ -27,7 +28,8 @@ include_once "./api/db.php";
 				<a href="?do=look">購物流程</a> |
 				<a href="?do=buycart">購物車</a> |
 				<a href="?do=login">會員登入</a> |
-				<a href="?do=admin">管理登入</a>
+				<?=isset($_SESSION['admin'])?"<a href='./admin.php'>返回管理</a>":"<a href='?do=admin'>管理登入</a>"?>
+				<!-- <a href="?do=admin">管理登入</a> -->
 			</div>
 			<marquee>
 				情人節特惠活動 &nbsp; 為了慶祝七夕情人節，將舉辦情人兩人到現場有七七折之特惠活動~

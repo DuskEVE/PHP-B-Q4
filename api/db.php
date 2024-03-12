@@ -13,7 +13,7 @@ class myDB{
         $this->table = $table;
     }
     function dbLogin(){
-        $dsn = "mysql:host=$$this->host; charset=$this->charset; dbname=$this->dbname";
+        $dsn = "mysql:host=$this->host; charset=$this->charset; dbname=$this->dbname;";
         return new PDO($dsn, $this->user, $this->password);
     }
     function getTargetSet($target, $sep){
@@ -81,5 +81,8 @@ class myDB{
         return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+
+$User = new myDB('user');
+$Admin = new myDB('admin');
 
 ?>
