@@ -37,11 +37,11 @@ include_once "./api/db.php";
 		</div>
 		<div id="right">
 		<?php
-		$do = "main";
+		$do = "admin";
 		if(isset($_GET['do'])) $do = $_GET['do'];
 		$file = "./back/$do.php";
 		if(file_exists($file)) include $file;
-		else include "./back/main.php";
+		else include "./back/admin.php";
 		?>
 		</div>
 		<div id="bottom" style="line-height:70px; color:#FFF; background:url(./icon/bot.png);" class="ct">
