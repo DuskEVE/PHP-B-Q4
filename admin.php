@@ -1,5 +1,6 @@
 <?php
 include_once "./api/db.php";
+$bottom = $Bottom->searchAll()[0];
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -30,7 +31,7 @@ include_once "./api/db.php";
 				<a href="?do=th">商品分類與管理</a>
 				<a href="?do=order">訂單管理</a>
 				<a href="?do=mem">會員管理</a>
-				<a href="?do=bot">頁尾版權管理</a>
+				<a href="?do=bottom">頁尾版權管理</a>
 				<a href="?do=news">最新消息管理</a>
 				<a href="./api/logout.php" style="color:#f00;">登出</a>
 			</div>
@@ -45,7 +46,7 @@ include_once "./api/db.php";
 		?>
 		</div>
 		<div id="bottom" style="line-height:70px; color:#FFF; background:url(./icon/bot.png);" class="ct">
-			頁尾版權 : </div>
+			頁尾版權 : <?=$bottom['text']?></div>
 	</div>
 
 </body>

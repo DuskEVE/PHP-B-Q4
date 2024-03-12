@@ -84,5 +84,8 @@ class myDB{
 
 $User = new myDB('user');
 $Admin = new myDB('admin');
+$Bottom = new myDB('bottom');
+$Goods = new myDB('goods');
+$Orders = new myDB('orders');
 
 ?>
