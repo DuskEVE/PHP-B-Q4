@@ -31,13 +31,13 @@ else $allGoods = $Goods->searchAll(['display'=>1]);
         ?>
         <tr>
             <td class="pp">
-                <img src="./img/<?=$goods['img']?>" style="width: 150px;">
+                <a href="?do=detail&id=<?=$goods['id']?>" style="float: right;"><img src="./img/<?=$goods['img']?>" style="width: 150px;"></a>
             </td>
             <td>
                 <div class="tt ct"><?=$goods['name']?></div>
                 <div class="pp">
                     價格:<?=$goods['price']?>
-                    <a href="?do=detail&id=<?=$goods['id']?>" style="float: right;"><img src="./icon/0402.jpg"></a>
+                    <a href="?do=buycart&id=<?=$goods['id']?>&qt=1" style="float: right;"><img src="./icon/0402.jpg"></a>
                 </div>
                 <div class="pp">規格:<?=$goods['spec']?></div>
                 <div class="pp">簡介:<?=$goods['intro']?></div>
@@ -47,4 +47,5 @@ else $allGoods = $Goods->searchAll(['display'=>1]);
         }
         ?>
     </table>
+
 </div>
