@@ -1,6 +1,6 @@
 <div class="all">
     <h2 class="all">會員註冊</h2>
-    <h3>會員登入</h3>
+
     <div>
         <table style="width: 70%; margin:auto;">
             <tr>

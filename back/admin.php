@@ -21,7 +21,7 @@
                 else{
                 ?>
                 <button onclick="location.href='?do=edit_admin&id=<?=$admin['id']?>'">修改</button>
-                <button class="del-btn" date-id="<?=$admin['id']?>">刪除</button>
+                <button class="del-btn" data-id="<?=$admin['id']?>">刪除</button>
                 <?php
                 }
                 ?>
@@ -34,10 +34,9 @@
 </div>
 
 <script>
-    $('.edit-btn').on('click', (event) => {
 
-    });
     $('.del-btn').on('click', (event) => {
-
+        let id = $(event.target).data('id');
+        $.post('./api/del_user.php', {id, table:'admin'}, (re) => location.reload());
     });
 </script>
