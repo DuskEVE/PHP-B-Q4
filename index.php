@@ -39,6 +39,26 @@ $bottom = $Bottom->searchAll()[0];
 		</div>
 		<div id="left" class="ct">
 			<div style="min-height:400px;">
+			<?php
+			$mains = $Type->searchAll(['main_id'=>0]);
+			foreach($mains as $main){
+				$subs = $Type->searchAll(['main_id'=>$main['id']]);
+			?>
+			<div class="ct ww">
+				<a href="?main_id=<?=$main['id']?>"><?=$main['name']?></a>
+				<div class="ct s">
+					<?php
+					foreach($subs as $sub){
+						echo "<a href='?main_id={$main['id']}&sub_id={$sub['id']}' style='background-color:lightblue; position:relative; left:20px;'>
+							{$sub['name']}
+						</a>";
+					}
+					?>
+				</div>
+			</div>
+			<?php
+			}
+			?>
 			</div>
 			<span>
 				<div>進站總人數</div>
