@@ -22,7 +22,7 @@ $sub = $Type->search(['id'=>$goods['sub_id']]);
             </td>
             <td>
                 <div class="pp">分類:<?=$main['name'].">".$sub['name']?></div>
-                <div class="pp">編號:<?=$goods['']?></div>
+                <div class="pp">編號:<?=$goods['no']?></div>
                 <div class="pp">價格:<?=$goods['price']?></div>
                 <div class="pp">簡介:<?=$goods['intro']?></div>
                 <div class="pp">庫存:<?=$goods['stock']?></div>

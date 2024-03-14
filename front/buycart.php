@@ -97,6 +97,7 @@ if(!isset($_SESSION['user'])) header("location:?do=login");
             }
             ?>
         </table>
+        <input type="hidden" name="total" id="total" value="">
         <div class="tt ct">總價:<span class="total"></span></div>
         <div class="ct">
             <input type="submit" value="確認送出">
@@ -128,6 +129,7 @@ $('.checkout-btn').on('click', () => {
     $('.cart').hide();
     $('.checkout').show();
     $('.total').text(total);
+    $('#total').val(total);
 
     $.post('./api/update_cart.php', {})
 });

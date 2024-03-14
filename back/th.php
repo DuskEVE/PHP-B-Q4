@@ -98,7 +98,8 @@
     });
 
     $('.del-goods').on('click', (event) => {
-        let id = $(event.target).data('id');
+        const target = $(event.target);
+        let id = target.data('id');
         $.post('./api/del_type.php', {id}, () => target.parent().parent().remove());
     });
     $('.display-btn').on('click', (event) => {
