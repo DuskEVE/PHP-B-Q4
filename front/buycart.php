@@ -47,7 +47,10 @@ if(!isset($_SESSION['user'])) header("location:?do=login");
         <table class="all">
             <tr>
                 <td class="tt ct" style="width: 40%;">登入帳號</td>
-                <td class="pp"><?=$_SESSION['user']?></td>
+                <td class="pp">
+                    <?=$_SESSION['user']?>
+                    <input type="hidden" name="user" value="<?=$_SESSION['user']?>">
+                </td>
             </tr>
             <tr>
                 <td class="tt ct">姓名</td>
@@ -83,18 +86,18 @@ if(!isset($_SESSION['user'])) header("location:?do=login");
             <tr class="pp">
                 <td><?=$goods['no']?></td>
                 <td><?=$goods['name']?></td>
+                <input type="number" hidden id="amount-<?=$goods['id']?>" name='goods[<?=$goods['id']?>]' value="<?=$qt?>">
                 <td id="qt-<?=$goods['id']?>">
                     <?=$qt?>
-                    <input type="hidden" id="amount-<?=$goods['id']?>" name="amount" value="<?=$qt?>">
                 </td>
                 <td><?=$goods['price']?></td>
-                <td class="count-<?=$goods['id']?>"><?=($goods['price']*$qt)?></td>
+                <td class="count count-<?=$goods['id']?>"><?=($goods['price']*$qt)?></td>
             </tr>
             <?php
             }
             ?>
         </table>
-        <div class="tt ct">總價:</div>
+        <div class="tt ct">總價:<span class="total"></span></div>
         <div class="ct">
             <input type="submit" value="確認送出">
             <input type="button" class="back-btn" value="返回修改訂單">
@@ -112,13 +115,29 @@ $('.qt').on('change', (event) => {
     $(`.count-${id}`).text(result);
     $(`#qt-${id}`).text(amount);
     $(`#amount-${id}`).val(amount);
+
+    let cart = {};
+    $('.qt').each((index, element) => cart[id] = amount);
+    $.post('./api/update_cart.php', cart);
 });
 $('.checkout-btn').on('click', () => {
+    let total = 0;
+    $('.count').each((index, element) => {
+        total += Number($(element).text());
+    });
     $('.cart').hide();
     $('.checkout').show();
+    $('.total').text(total);
+
+    $.post('./api/update_cart.php', {})
 });
 $('.back-btn').on('click', () => {
     $('.cart').show();
     $('.checkout').hide();
+});
+$('.del-btn').on('click', (event) => {
+    let target = $(event.target);
+    let id = target.data('id');
+    $.post('./api/del_cart.php', {id}, () => target.parent().parent().remove())
 });
 </script>
